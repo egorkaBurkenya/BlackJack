@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <h1 class="title">BlackJack 🃏</h1>
+  <h2 class="cards-count">cards count: <span>13</span></h2>
+
+  <div class="dealer-hand">
+    <div class="dealer-status">
+      <h2>Dealer hand</h2>
+      <h2 class="dealer-count">0</h2>
+    </div>
+    <div class="dealer-cards">
+      
+    </div>
+  </div>
+
+
+  <div class="your-hand">
+    <div class="your-status">
+      <h2>Your hand</h2>
+      <h2 class="your-count">0</h2>
+    </div>      
+    <div class="your-cards">
+
+    </div>
+  </div>
+
+  <div class="pannel">
+    <button class="start">Start Game</button>
+
+    <button class="hit">Hit</button>
+    <button class="stay">Stay</button>
+  </div>
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="static/main.js"></script>
+</body>
+</html>

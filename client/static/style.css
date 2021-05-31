@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+
+  background: linear-gradient(72.44deg, rgba(255, 213, 197, 0.8) 0%, rgba(193, 168, 220, 0.8) 100%);
+}
+
+.title {
+  font-size: 38px;
+}
+
+h2 {
+  margin-bottom: 6px;
+}
+
+.dealer-hand {
+  text-align: center;
+  background-color: rgba(0, 85, 255, 0.1);
+  /* border: 2px solid #0057FF; */
+  min-width: 400px;
+  padding: 18px;
+  border-radius: 12px;
+  margin: 12px auto 12px;
+}
+
+.your-hand {
+  text-align: center;
+}
+
+.card {
+  width: 100px;
+  margin: 0 2px;
+  border: 1px solid #222;
+  border-radius: 8px;
+}
+
+.pannel {
+  background-color: rgba(0, 85, 255, 0.1);
+  /* border: 2px solid #0057FF; */
+  margin: 40px 0;
+  padding: 18px;
+  border-radius: 12px;
+}
+
+.start, .restart {
+  color: #fafafa;
+  background-color: #0055ff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  width: 180px;
+  margin: 0 8px;
+}
+.start:hover, .restart:hover {
+  background-color: rgba(0, 85, 255, 0.8);
+}
+
+.hit, .stay {
+  display: none;
+  color: #fafafa;
+  background-color: #0055ff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  width: 120px;
+  margin: 0 8px;
+}
+
+.hit:hover, .stay:hover {
+  background-color: rgba(0, 85, 255, 0.8);
+}
+
+.your-status, .dealer-status{
+  display: flex;
+  align-items: center;
+}
+
+.dealer-status h2{
+  margin: 0 auto;
+}
+
+.your-count, .dealer-count{
+  margin-left: 10px;
+}
