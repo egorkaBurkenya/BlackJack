@@ -115,4 +115,11 @@ io.sockets.on('connection', socket => {
         socket.emit('dealer open card, bruh', {cardCount, card: gamersCards.dealer[0]});
     })
 
+    // socket.on('end game', () => {
+    //     const {card, spliceDeck} = Utiles.getCard(deck);
+    //     deck = spliceDeck;
+    //     gamersCards.dealer.push(card);
+    //     socket.emit('end game', card);
+    // })
+
     })

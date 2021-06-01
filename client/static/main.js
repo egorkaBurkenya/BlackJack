@@ -28,20 +28,21 @@ start.addEventListener('click', e => {
 
 hit.addEventListener('click', e => {
   socket.emit('lemmy only one card, bruh', true)
+  socket.emit('lemmy cards, bruh') 
 })
 
 stay.addEventListener('click', e => {
   stay.classList.add('hidden')
   hit.classList.add('hidden')
   restart.classList.remove('hidden')
-  // pannel.innerHTML = `<button class="restart">Restart Game</button>`
-  if(dealerTotal.innerText < 16) {
-    socket.emit('lemmy only one card, bruh', false)
-  }
+  socket.emit('open card')
+
+  socket.emit('lemmy cards, bruh') 
 })
 
 restart.addEventListener('click', e => {
   socket.emit('restart')
+  // socket.emit('lemmy cards, bruh') 
   window.location.reload()
 })
 
@@ -57,6 +58,25 @@ const addInfo = text => {
   info.innerHTML += `<p>${text}</p>`
 }
 
+const lose = () => {
+  info.innerHTML += `<p>You lose 🤔</p>`
+  stay.classList.add('hidden')
+  hit.classList.add('hidden')
+  restart.classList.remove('hidden')
+}
+const win = () => {
+  info.innerHTML += `<p>You win 🤗</p>`
+  stay.classList.add('hidden')
+  hit.classList.add('hidden')
+  restart.classList.remove('hidden')
+}
+const rashod = () => {
+  info.innerHTML += `<p>Расход 😎</p>`
+  stay.classList.add('hidden')
+  hit.classList.add('hidden')
+  restart.classList.remove('hidden')
+}
+
 // * socken.on
 
 socket.on('cards count', cardsCount => {
@@ -66,29 +86,77 @@ socket.on('cards count', cardsCount => {
 socket.on('card for user, bruh', card => {
   displayYourCard(card.name)
   socket.emit('lemmy gamers cards count, bruh', true)
+
+  socket.emit('lemmy cards, bruh')
 })
 
 socket.on('card for dealer, bruh', card => {
   displayDealerCard(card.name)
   socket.emit('lemmy gamers cards count, bruh', false)
+
+  socket.emit('lemmy cards, bruh')
 })
 
 socket.on('user cards count, bruh', cardCount => {
-  console.log(cardCount);
   yourTotal.innerText = cardCount
+  if (yourTotal.innerText > 21) {
+    lose()
+  } else if (yourTotal.innerText == 21) {
+    win()
+  }
 })
 
 socket.on('dealer cards count, bruh', cardCount => {
   dealerTotal.innerText = cardCount
-  if (pannel.innerHTML === `<button class="restart">Restart Game</button>`) {
-    if(dealerTotal.innerText < 16) {
+
+  if (!restart.classList.contains('hidden')) {
+    if (dealerTotal.innerText == 21) lose()
+    if (dealerTotal.innerText < 16) {
       socket.emit('lemmy only one card, bruh', false)
-    } else socket.emit('open card')
+    } else if (dealerTotal.innerText < 21 && !dealerTotal.innerText == 21) {
+      if (dealerTotal.innerText > yourTotal.innerText) lose()
+      if (dealerTotal.innerText < yourTotal.innerText) win()
+      else rashod()
+    } else win()
   }
+
 })
 
 socket.on('dealer open card, bruh', ({cardCount, card}) => {
   // displayDealerCard()
   dealerHand.firstElementChild.setAttribute('src', `./static/PNG/${card.name}.png`);
   dealerTotal.innerText = cardCount
+
+  if (dealerTotal.innerText == 21) lose()
+  if (dealerTotal.innerText > 21) win()
+  if (dealerTotal.innerText < 16) {
+    socket.emit('lemmy only one card, bruh', false)
+  } else {
+    if (dealerTotal.innerText > yourTotal.innerText) lose()
+    if (dealerTotal.innerText < yourTotal.innerText) win()
+    else rashod()
+  }
+
+  
+
 })
+
+// socket.on('end game', card => {
+//   displayDealerCard(card.name)
+//   socket.emit('lemmy gamers cards count, bruh', false)
+
+//   if (dealerTotal.innerText < 16) {
+//     socket.emit('end game')
+//     socket.emit('lemmy gamers cards count, bruh', false)
+//   } else if (dealerTotal.innerText > 21) {
+//     win()
+//   } else if (dealerTotal.innerText > yourTotal.innerText) {
+//     lose()
+//   } else if (dealerTotal.innerText < yourTotal.innerText) {
+//     win()
+//   }
+
+//   socket.emit('lemmy cards, bruh')
+// })
+
+
