@@ -110,53 +110,37 @@ socket.on('dealer cards count, bruh', cardCount => {
   dealerTotal.innerText = cardCount
 
   if (!restart.classList.contains('hidden')) {
+
     if (dealerTotal.innerText == 21) lose()
-    if (dealerTotal.innerText < 16) {
+    else if (dealerTotal.innerText > 21) win()
+    else if (dealerTotal.innerText < 16) {
       socket.emit('lemmy only one card, bruh', false)
-    } else if (dealerTotal.innerText < 21 && !dealerTotal.innerText == 21) {
+    } else {
       if (dealerTotal.innerText > yourTotal.innerText) lose()
       if (dealerTotal.innerText < yourTotal.innerText) win()
-      else rashod()
-    } else win()
+      if (dealerTotal.innerText == yourTotal.innerText) rashod()
+    }
+
   }
 
 })
 
 socket.on('dealer open card, bruh', ({cardCount, card}) => {
-  // displayDealerCard()
-  dealerHand.firstElementChild.setAttribute('src', `./static/PNG/${card.name}.png`);
+  const hiddenCard = dealerHand.firstElementChild
+  hiddenCard.setAttribute('src', `./static/PNG/${card.name}.png`);
   dealerTotal.innerText = cardCount
 
   if (dealerTotal.innerText == 21) lose()
-  if (dealerTotal.innerText > 21) win()
-  if (dealerTotal.innerText < 16) {
+  else if (dealerTotal.innerText > 21) win()
+  else if (dealerTotal.innerText < 16) {
     socket.emit('lemmy only one card, bruh', false)
   } else {
     if (dealerTotal.innerText > yourTotal.innerText) lose()
     if (dealerTotal.innerText < yourTotal.innerText) win()
-    else rashod()
+    if (dealerTotal.innerText == yourTotal.innerText) rashod()
   }
 
   
 
 })
-
-// socket.on('end game', card => {
-//   displayDealerCard(card.name)
-//   socket.emit('lemmy gamers cards count, bruh', false)
-
-//   if (dealerTotal.innerText < 16) {
-//     socket.emit('end game')
-//     socket.emit('lemmy gamers cards count, bruh', false)
-//   } else if (dealerTotal.innerText > 21) {
-//     win()
-//   } else if (dealerTotal.innerText > yourTotal.innerText) {
-//     lose()
-//   } else if (dealerTotal.innerText < yourTotal.innerText) {
-//     win()
-//   }
-
-//   socket.emit('lemmy cards, bruh')
-// })
-
 
