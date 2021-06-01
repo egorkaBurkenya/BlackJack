@@ -71,11 +71,12 @@ socket.on('hitedDealerCard', ({card, count}) => {
 })
 
 socket.on('DealerStop', card => {
-  console.log(card);
+  // console.log(card);
+  document.querySelector('.dealer-count').innerHTML = parseInt(document.querySelector('.dealer-count').innerHTML) + card[0].value
   document.querySelector('.hidden').setAttribute('src', `static/PNG/${card.name}.png`)
   if (parseInt(document.querySelector('.dealer-count').innerHTML) > 21) {
     youWin()
-  }else if (parseInt(document.querySelector('.dealer-count').innerHTML) > parseInt(document.querySelector('.your-count').innerHTML)) {
+  } else if (parseInt(document.querySelector('.dealer-count').innerHTML) > parseInt(document.querySelector('.your-count').innerHTML)) {
     youLose()
   } else if (parseInt(document.querySelector('.dealer-count').innerHTML) < parseInt(document.querySelector('.your-count').innerHTML)) {
     youWin()
