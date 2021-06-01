@@ -41,10 +41,10 @@ stay.addEventListener('click', e => {
 // * functions
 
 const displayYourCard = name => {
-  yourHand.innerHTML += `<img src="./static/PNG/${name}.png"/>`
+  yourHand.innerHTML += `<img class="card" src="./static/PNG/${name}.png"/>`
 }
 const displayDealerCard = name => {
-  dealerHand.innerHTML += `<img src="./static/PNG/${name}.png"/>`
+  dealerHand.innerHTML += `<img class="card" src="./static/PNG/${name}.png"/>`
 }
 const addInfo = text => {
   info.innerHTML += `<p>${text}</p>`
