@@ -9,34 +9,28 @@
 </head>
 <body>
   <h1 class="title">BlackJack 🃏</h1>
-  <h2 class="cards-count">cards count: <span>13</span></h2>
+  <!-- <h2 class="cards-count">cards count: <span>13</span></h2> -->
+  <div class="wrapper">
+    <aside class="info">
+      <p>Cards total: <br> <span class="total">13</span></p>
+      <p>Dealer total: <br> <span class="d-total">0</span></p>
+      <p>Your total: <br> <span class="y-total">0</span></p>
+    </aside>
 
-  <div class="dealer-hand">
-    <div class="dealer-status">
-      <h2>Dealer hand</h2>
-      <h2 class="dealer-count">0</h2>
+    <div class="game">
+      <section class="table">
+        <div class="dealer-hand"></div>
+
+        <div class="your-hand"></div>
+      </section>
+  
+      <div class="pannel">
+        <button class="start">Start Game</button>
+        <button class="restart hidden">Restart Game</button>
+        <button class="hit hidden">Hit</button>
+        <button class="stay hidden">Stay</button>
+      </div>
     </div>
-    <div class="dealer-cards">
-      
-    </div>
-  </div>
-
-
-  <div class="your-hand">
-    <div class="your-status">
-      <h2>Your hand</h2>
-      <h2 class="your-count">0</h2>
-    </div>      
-    <div class="your-cards">
-
-    </div>
-  </div>
-
-  <div class="pannel">
-    <button class="start">Start Game</button>
-
-    <button class="hit">Hit</button>
-    <button class="stay">Stay</button>
   </div>
   
   <script src="/socket.io/socket.io.js"></script>
