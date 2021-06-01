@@ -36,8 +36,7 @@ stay.addEventListener('click', e => {
   hit.classList.add('hidden')
   restart.classList.remove('hidden')
   socket.emit('open card')
-
-  socket.emit('lemmy cards, bruh') 
+  // socket.emit('lemmy cards, bruh')   
 })
 
 restart.addEventListener('click', e => {
@@ -107,37 +106,25 @@ socket.on('user cards count, bruh', cardCount => {
 })
 
 socket.on('dealer cards count, bruh', cardCount => {
+
   dealerTotal.innerText = cardCount
-
-  if (!restart.classList.contains('hidden')) {
-
-    if (dealerTotal.innerText == 21) lose()
-    else if (dealerTotal.innerText > 21) win()
-    else if (dealerTotal.innerText < 16) {
-      socket.emit('lemmy only one card, bruh', false)
-    } else {
-      if (dealerTotal.innerText > yourTotal.innerText) lose()
-      if (dealerTotal.innerText < yourTotal.innerText) win()
-      if (dealerTotal.innerText == yourTotal.innerText) rashod()
-    }
-
-  }
+  socket.emit('lemmy cards, bruh')
 
 })
 
-socket.on('dealer open card, bruh', ({cardCount, card}) => {
-  const hiddenCard = dealerHand.firstElementChild
-  hiddenCard.setAttribute('src', `./static/PNG/${card.name}.png`);
+socket.on('dealer open card, bruh', ({cardCount, cards}) => {
+  dealerHand.innerHTML = ''
+  cards.forEach(card => {
+    displayDealerCard(card.name)
+  })
   dealerTotal.innerText = cardCount
 
   if (dealerTotal.innerText == 21) lose()
   else if (dealerTotal.innerText > 21) win()
-  else if (dealerTotal.innerText < 16) {
-    socket.emit('lemmy only one card, bruh', false)
-  } else {
-    if (dealerTotal.innerText > yourTotal.innerText) lose()
-    if (dealerTotal.innerText < yourTotal.innerText) win()
-    if (dealerTotal.innerText == yourTotal.innerText) rashod()
+  else {
+    if (parseInt(dealerTotal.innerText) > parseInt(yourTotal.innerText)) lose()
+    if (parseInt(dealerTotal.innerText) < parseInt(yourTotal.innerText)) win()
+    if (parseInt(dealerTotal.innerText) == parseInt(yourTotal.innerText)) rashod()
   }
 
   

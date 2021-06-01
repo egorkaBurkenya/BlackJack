@@ -110,8 +110,17 @@ io.sockets.on('connection', socket => {
     })
 
     socket.on('open card', () => {
-        const cardCount = Utiles.gamerCardsCount(gamersCards.dealer, false);
-        socket.emit('dealer open card, bruh', {cardCount, card: gamersCards.dealer[0]});
+
+        let cardCount = Utiles.gamerCardsCount(gamersCards.dealer, false);
+
+        while (cardCount < 16 && cardCount != 16) {
+            const {card, spliceDeck} = Utiles.getCard(deck);
+            deck = spliceDeck;
+            gamersCards.dealer.push(card);
+            cardCount = Utiles.gamerCardsCount(gamersCards.dealer, false);
+        }
+
+        socket.emit('dealer open card, bruh', {cardCount, cards: gamersCards.dealer});
     })
 
     })
