@@ -43,6 +43,9 @@ body {
   border-radius: 12px;
   margin: 12px;
 }
+.dealer-hand, .your-hand {
+  height: 160px;
+}
 .pannel {
   justify-content: center;
 }
@@ -84,7 +87,6 @@ body {
 }
 
 .hit, .stay {
-  display: none;
   color: #fafafa;
   background-color: #0055ff;
   border: none;
@@ -109,4 +111,8 @@ body {
 
 .your-count, .dealer-count{
   margin-left: 10px;
+}
+
+.hidden {
+  display: none;
 }

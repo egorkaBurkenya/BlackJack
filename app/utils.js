@@ -23,7 +23,7 @@ module.exports.Utiles = {
     gamerCardsCount: (arr, isHiddenCard) => {
         let count = 0;
         if (isHiddenCard) arr.splice(0, 1);
-        for (key in arr) {            
+        for (key in arr) {          
             if (arr[key].name != 'AC') {
                 count += arr[key].value;
             }    

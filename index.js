@@ -40,12 +40,21 @@ io.sockets.on('connection', socket => {
     };
     gamersCards[socket.id] = [];
     
-
+    /*
+     * Получение кол-во кард в колоде !
+    */ 
     socket.on('lemmy cards, bruh', () => {
         let cardsCount = Utiles.cardsCount(deck);
         socket.emit('cards count', cardsCount);
     });
 
+    /* 
+    * Отдает одну карту 
+    * isUser:
+        * если true: отдает карту пользовтелю
+        * если false: отдает карту дилеру   
+    
+    */
     socket.on('lemmy only one card, bruh', isUser => {
 
         const {card, spliceDeck} = Utiles.getCard(deck);
@@ -58,7 +67,7 @@ io.sockets.on('connection', socket => {
 
             gamersCards.dealer.push(card);
 
-            if (gamersCards.dealer.length != 1) {
+            if (gamersCards.dealer.length > 1) {
                 socket.emit('card for dealer, bruh', card);
             } else {
                 socket.emit('card for dealer, bruh', {name: 'green_back', value: 0});
@@ -66,14 +75,27 @@ io.sockets.on('connection', socket => {
         }
         })
     
+    /* 
+    * Отдает кол-во очков пользоватлея:
+    * isUser:
+        * если true: отдает очки пользовтелю
+        * если false: отдает очки дилеру  
+    */
     socket.on('lemmy gamers cards count, bruh', isUser => {
         if (isUser) {
             const cardCount = Utiles.gamerCardsCount(gamersCards[socket.id], false);
             socket.emit('user cards count, bruh', cardCount);
         } else {
             const cardCount = Utiles.gamerCardsCount(gamersCards.dealer, true);
+            console.log(gamersCards);
             socket.emit('dealer cards count, bruh', cardCount);
         }
     })
+
+    /* 
+    * Пользователь, перестал набирать карты 
+    * Карты начинает набирать dealer
+    */
+    // socket.on('stay')
 
     })
