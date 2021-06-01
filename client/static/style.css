@@ -3,6 +3,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -16,42 +17,58 @@ body {
   background: linear-gradient(72.44deg, rgba(255, 213, 197, 0.8) 0%, rgba(193, 168, 220, 0.8) 100%);
 }
 
+.wrapper {
+  width: 70%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+}
+
 .title {
+  margin-top: 12px;
   font-size: 38px;
 }
 
-h2 {
-  margin-bottom: 6px;
+.game {
+  width: auto;
+  flex-grow: 1;
+  min-width: 400px;
+  max-width: 700px;
 }
 
-.dealer-hand {
-  text-align: center;
+.dealer-hand, .your-hand, .pannel, .info {
+  display: flex;
   background-color: rgba(0, 85, 255, 0.1);
-  /* border: 2px solid #0057FF; */
-  min-width: 400px;
   padding: 18px;
   border-radius: 12px;
-  margin: 12px auto 12px;
+  margin: 12px;
+}
+.pannel {
+  justify-content: center;
+}
+.info {
+  flex-direction: column;
+  height: 400px;
+  max-width: 220px;
+  text-align: center;
 }
 
-.your-hand {
-  text-align: center;
+.info p {
+  font-size: 18px;
+  font-weight: 500;
+  height: 20%;
+}
+.info p span {
+  color:#0055ff;
 }
 
 .card {
-  width: 100px;
+  width: 80px;
   margin: 0 2px;
   border: 1px solid #222;
   border-radius: 8px;
 }
 
-.pannel {
-  background-color: rgba(0, 85, 255, 0.1);
-  /* border: 2px solid #0057FF; */
-  margin: 40px 0;
-  padding: 18px;
-  border-radius: 12px;
-}
 
 .start, .restart {
   color: #fafafa;
